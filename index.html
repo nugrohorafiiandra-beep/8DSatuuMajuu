@@ -129,44 +129,33 @@ p.page-desc{color:var(--foam-dim);max-width:620px;line-height:1.65;margin:0 0 36
 .stat-chip{font-family:var(--font-mono);font-size:12px;color:var(--foam-dim);border:1px solid var(--glass-border);padding:8px 14px;border-radius:10px;background:var(--glass);}
 .stat-chip b{color:var(--cyan);font-size:15px;display:block;font-family:var(--font-display);}
 
-/* ---------- Absensi ---------- */
-.absen-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;}
-@media(max-width:820px){.absen-layout{grid-template-columns:1fr;}}
-.field{margin-bottom:16px;}
-.field label{display:block;font-size:12.5px;color:var(--foam-dim);margin-bottom:6px;font-family:var(--font-mono);letter-spacing:0.03em;}
-.field input[type=text], .field textarea, .field select{
-  width:100%;background:rgba(4,13,24,0.5);border:1px solid var(--glass-border);border-radius:10px;
-  padding:11px 13px;color:var(--foam);font-family:var(--font-body);font-size:14px;resize:vertical;
+/* ---------- Album Kenangan ---------- */
+.album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
+.porthole{
+  position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/10;
+  border:1px solid var(--glass-border);
+  box-shadow:0 0 0 6px rgba(255,255,255,0.03), 0 20px 40px -18px rgba(0,0,0,0.6);
+  cursor:pointer;
 }
-.field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(76,201,240,0.18);}
-.status-toggle{display:flex;gap:8px;flex-wrap:wrap;}
-.status-toggle label{flex:1 1 calc(50% - 8px);min-width:90px;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;border:1px solid var(--glass-border);border-radius:10px;cursor:pointer;font-size:13px;transition:all 0.2s ease;text-align:center;}
-.status-toggle input{accent-color:var(--cyan);}
-.status-toggle label.sel-hadir{border-color:var(--cyan);background:rgba(76,201,240,0.12);}
-.status-toggle label.sel-sakit{border-color:var(--gold);background:rgba(242,200,121,0.14);}
-.status-toggle label.sel-izin{border-color:var(--violet);background:rgba(138,92,246,0.14);}
-.status-toggle label.sel-alfa{border-color:#FF8A8A;background:rgba(255,138,138,0.14);}
-#reason-field{display:none;}
-#reason-field.show{display:block;}
-.submit-btn{
-  width:100%;font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--abyss);
-  background:linear-gradient(120deg,var(--cyan),var(--gold));border:none;padding:13px;border-radius:10px;cursor:pointer;
-  transition:transform 0.2s ease;
+.porthole img, .porthole video{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;filter:saturate(1.05) contrast(1.02);}
+.porthole:hover img, .porthole:hover video{transform:scale(1.06);}
+.porthole .play-badge{position:absolute;top:10px;left:12px;z-index:2;font-family:var(--font-mono);font-size:10.5px;color:var(--foam);background:rgba(4,13,24,0.55);padding:3px 9px;border-radius:8px;display:flex;align-items:center;gap:5px;}
+.porthole::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, transparent 55%, rgba(4,13,24,0.85) 100%);
 }
-.submit-btn:hover{transform:translateY(-1px);}
-.submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
-#absen-msg{font-size:13px;margin-top:10px;font-family:var(--font-mono);min-height:18px;}
-.log-list{display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto;padding-right:4px;}
-.log-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(4,13,24,0.35);}
-.log-dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0;}
-.log-dot.hadir{background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
-.log-dot.sakit{background:var(--gold);box-shadow:0 0 8px var(--gold);}
-.log-dot.izin{background:var(--violet);box-shadow:0 0 8px var(--violet);}
-.log-dot.alfa{background:#FF8A8A;box-shadow:0 0 8px #FF8A8A;}
-.log-name{font-weight:600;font-size:14px;}
-.log-meta{font-family:var(--font-mono);font-size:11px;color:var(--foam-dim);margin-top:2px;}
-.log-reason{margin-top:6px;font-size:13px;color:var(--foam-dim);font-style:italic;}
-.log-empty{color:var(--foam-dim);font-size:13.5px;text-align:center;padding:40px 0;}
+.porthole::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:20px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25), inset 0 -30px 40px -20px rgba(0,0,0,0.5);
+}
+.porthole .cap{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;font-size:12.5px;font-family:var(--font-mono);color:var(--foam);}
+.porthole .num{position:absolute;top:10px;right:12px;z-index:2;font-family:var(--font-mono);font-size:11px;color:var(--foam-dim);background:rgba(4,13,24,0.5);padding:2px 8px;border-radius:8px;}
+
+/* ---------- Album Video ---------- */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
+
+/* ---------- Album Foto ---------- */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
 
 /* ---------- Struktur kelas (pohon + akar) ---------- */
 .tree-wrap{position:relative;padding:20px 0 10px;}
@@ -194,59 +183,6 @@ p.page-desc{color:var(--foam-dim);max-width:620px;line-height:1.65;margin:0 0 36
 .root-chip:hover{background:rgba(76,201,240,0.16);cursor:text;}
 .add-root-btn{font-family:var(--font-mono);font-size:12.5px;padding:8px 14px;border-radius:999px;border:1px dashed var(--foam-faint);background:transparent;color:var(--foam-dim);cursor:pointer;}
 .add-root-btn:hover{color:var(--foam);border-color:var(--foam-dim);}
-
-/* ---------- Album kenangan ---------- */
-.album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
-.porthole{
-  position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/10;
-  border:1px solid var(--glass-border);
-  box-shadow:0 0 0 6px rgba(255,255,255,0.03), 0 20px 40px -18px rgba(0,0,0,0.6);
-  cursor:pointer;
-}
-.porthole img, .porthole video{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;filter:saturate(1.05) contrast(1.02);}
-.porthole:hover img, .porthole:hover video{transform:scale(1.06);}
-.porthole .play-badge{position:absolute;top:10px;left:12px;z-index:2;font-family:var(--font-mono);font-size:10.5px;color:var(--foam);background:rgba(4,13,24,0.55);padding:3px 9px;border-radius:8px;display:flex;align-items:center;gap:5px;}
-.porthole::before{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg, transparent 55%, rgba(4,13,24,0.85) 100%);
-}
-.porthole::after{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:20px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25), inset 0 -30px 40px -20px rgba(0,0,0,0.5);
-}
-.porthole .cap{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;font-size:12.5px;font-family:var(--font-mono);color:var(--foam);}
-.porthole .num{position:absolute;top:10px;right:12px;z-index:2;font-family:var(--font-mono);font-size:11px;color:var(--foam-dim);background:rgba(4,13,24,0.5);padding:2px 8px;border-radius:8px;}
-
-/* ---------- Chat Global ---------- */
-.gate-box{max-width:440px;margin:20px auto 0;text-align:center;}
-.gate-box input{
-  width:100%;text-align:center;font-family:var(--font-mono);font-size:15px;letter-spacing:0.04em;
-  background:rgba(4,13,24,0.5);border:1px solid var(--glass-border);border-radius:10px;padding:13px;color:var(--foam);margin-bottom:12px;
-}
-.gate-box input:focus{outline:none;border-color:var(--cyan);}
-.gate-hint{font-size:12px;color:var(--foam-dim);margin-top:14px;}
-#gate-error{color:#FF8A8A;font-size:13px;min-height:18px;margin-bottom:4px;font-family:var(--font-mono);}
-.chat-shell{display:none;flex-direction:column;height:520px;}
-.chat-shell.show{display:flex;}
-.chat-timer{font-family:var(--font-mono);font-size:11.5px;color:var(--foam-dim);text-align:right;margin-bottom:10px;}
-.chat-timer b{color:var(--cyan);}
-.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:14px;border:1px solid var(--glass-border);background:rgba(4,13,24,0.35);}
-.msg{max-width:78%;padding:10px 13px;border-radius:14px;font-size:13.8px;line-height:1.5;}
-.msg.me{align-self:flex-end;background:linear-gradient(120deg,rgba(76,201,240,0.25),rgba(138,92,246,0.25));border:1px solid rgba(76,201,240,0.3);}
-.msg.other{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);}
-.msg .m-name{font-family:var(--font-mono);font-size:10.5px;color:var(--cyan);margin-bottom:3px;}
-.msg .m-time{font-family:var(--font-mono);font-size:9.5px;color:var(--foam-dim);margin-top:4px;text-align:right;}
-.chat-input-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-.chat-input-row input{min-width:0;background:rgba(4,13,24,0.5);border:1px solid var(--glass-border);border-radius:10px;padding:11px 13px;color:var(--foam);font-family:var(--font-body);font-size:14px;}
-.chat-input-row input:focus{outline:none;border-color:var(--cyan);}
-#chat-name{flex:0 1 110px;}
-#chat-input{flex:1 1 160px;}
-.chat-input-row button{flex:0 0 auto;font-family:var(--font-display);font-weight:600;background:linear-gradient(120deg,var(--cyan),var(--gold));border:none;border-radius:10px;padding:0 20px;height:40px;color:var(--abyss);cursor:pointer;white-space:nowrap;}
-@media(max-width:480px){
-  #chat-name{flex:1 1 100%;}
-  #chat-input{flex:1 1 100%;}
-  .chat-input-row button{flex:1 1 100%;height:42px;}
-}
 
 /* ---------- Music player (floating) ---------- */
 #music-fab{
@@ -327,10 +263,10 @@ footer.site-footer{text-align:center;color:var(--foam-dim);font-family:var(--fon
     <div class="brand"><span class="brand-mark"></span> Kelas VIIID</div>
     <nav class="tabs">
       <button data-tab="beranda" class="active">Beranda</button>
-      <button data-tab="absensi">Absensi</button>
+      <button data-tab="video">Video Kenangan</button>
+      <button data-tab="foto">Foto Kenangan</button>
       <button data-tab="struktur">Struktur Kelas</button>
       <button data-tab="album">Album Kenangan</button>
-      <button data-tab="chat">Chat Global</button>
     </nav>
   </header>
 
@@ -371,14 +307,14 @@ footer.site-footer{text-align:center;color:var(--foam-dim);font-family:var(--fon
     <section class="tab active" id="tab-beranda">
       <div class="eyebrow">Koordinat: 0°</div>
       <h1 class="page-title">Selamat datang di web kelas VIIID.</h1>
-      <p class="page-desc">Satu ruang digital untuk seluruh kelas — mencatat kehadiran, mengenal struktur kepengurusan, menyimpan kenangan, dan mengobrol bersama. Tenang seperti laut dalam, luas seperti langit malam.</p>
+      <p class="page-desc">Satu ruang digital untuk seluruh kelas — mengenal struktur kepengurusan, menyimpan kenangan dalam video dan foto, serta bernostalgia bersama. Tenang seperti laut dalam, luas seperti langit malam.</p>
       <div class="hero-grid">
         <div class="card">
           <div class="eyebrow">Tentang ruang ini</div>
           <p style="color:var(--foam-dim);line-height:1.7;font-size:14.5px;">Jangan pernah merasa tertinggal hanya karena perjalananmu berbeda. Setiap orang punya waktunya masing-masing untuk bersinar. Fokuslah memperbaiki diri, menikmati proses, dan terus melangkah meskipun pelan. Karena yang hebat bukan mereka yang tidak pernah jatuh, tapi mereka yang selalu punya alasan untuk bangkit.</p>
           <div class="stat-row">
-            <div class="stat-chip"><b>10</b>Kenangan tersimpan</div>
-            <div class="stat-chip"><b>5</b>Lagu di playlist</div>
+            <div class="stat-chip"><b>30</b>Kenangan tersimpan</div>
+            <div class="stat-chip"><b>3</b>Lagu di playlist</div>
             <div class="stat-chip"><b>31 Murid</b>Jumlah Murid</div>
           </div>
         </div>
@@ -386,38 +322,20 @@ footer.site-footer{text-align:center;color:var(--foam-dim);font-family:var(--fon
       </div>
     </section>
 
-    <!-- ABSENSI -->
-    <section class="tab" id="tab-absensi">
-      <div class="eyebrow">Log Kehadiran</div>
-      <h1 class="page-title">Absensi</h1>
-      <p class="page-desc">Isi kehadiranmu hari ini. Jika tidak masuk sekolah, sertakan alasannya — jika hadir, cukup kirim tanpa alasan.</p>
-      <div class="absen-layout">
-        <form class="card" id="absen-form">
-          <div class="field">
-            <label for="absen-name">Nama</label>
-            <input type="text" id="absen-name" placeholder="Nama lengkap" required>
-          </div>
-          <div class="field">
-            <label>Status kehadiran</label>
-            <div class="status-toggle">
-              <label id="lbl-hadir"><input type="radio" name="status" value="Hadir" checked> Hadir</label>
-              <label id="lbl-sakit"><input type="radio" name="status" value="Sakit"> Sakit</label>
-              <label id="lbl-izin"><input type="radio" name="status" value="Izin"> Izin</label>
-              <label id="lbl-alfa"><input type="radio" name="status" value="Alfa"> Alfa</label>
-            </div>
-          </div>
-          <div class="field" id="reason-field">
-            <label for="absen-reason">Alasan</label>
-            <textarea id="absen-reason" rows="3" placeholder="Jelaskan alasan singkat, mis. demam, acara keluarga, dll."></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Kirim Absensi</button>
-          <div id="absen-msg"></div>
-        </form>
-        <div class="card">
-          <div class="eyebrow">Riwayat hari ini</div>
-          <div class="log-list" id="log-list"><div class="log-empty">Memuat catatan absensi…</div></div>
-        </div>
-      </div>
+    <!-- VIDEO KENANGAN -->
+    <section class="tab" id="tab-video">
+      <div class="eyebrow">Arsip Video</div>
+      <h1 class="page-title">Video Kenangan</h1>
+      <p class="page-desc">Sepuluh video momen-momen berharga kelas VIIID — arahkan kursor untuk memutar, klik untuk memperbesar.</p>
+      <div class="video-grid" id="video-grid"></div>
+    </section>
+
+    <!-- FOTO KENANGAN -->
+    <section class="tab" id="tab-foto">
+      <div class="eyebrow">Arsip Foto</div>
+      <h1 class="page-title">Foto Kenangan</h1>
+      <p class="page-desc">Sepuluh foto yang membekukan momen indah kelas VIIID.</p>
+      <div class="photo-grid" id="photo-grid"></div>
     </section>
 
     <!-- STRUKTUR KELAS -->
@@ -446,13 +364,11 @@ footer.site-footer{text-align:center;color:var(--foam-dim);font-family:var(--fon
         <div class="tree-level">
           <div class="role-node">
             <div class="role-label">Cabang · Sekretaris</div>
-            <div class="role-name" contenteditable="true" data-key="sekretaris">1. Raisya
-2. Kasih</div>
+            <div class="role-name" contenteditable="true" data-key="sekretaris">1. Raisya\n2. Kasih</div>
           </div>
           <div class="role-node">
             <div class="role-label">Cabang · Bendahara</div>
-            <div class="role-name" contenteditable="true" data-key="bendahara">1. Cinta
-2. Aqila</div>
+            <div class="role-name" contenteditable="true" data-key="bendahara">1. Cinta\n2. Aqila</div>
           </div>
         </div>
         <div class="tree-level" style="margin-bottom:20px;">
@@ -483,39 +399,12 @@ footer.site-footer{text-align:center;color:var(--foam-dim);font-family:var(--fon
       </div>
     </section>
 
-    <!-- ALBUM KENANGAN -->
+    <!-- ALBUM KENANGAN (Campuran) -->
     <section class="tab" id="tab-album">
       <div class="eyebrow">Arsip Visual</div>
       <h1 class="page-title">Album Kenangan</h1>
-      <p class="page-desc">Sepuluh jendela kapal selam menuju momen-momen kelas — sorot salah satu untuk melihatnya lebih dekat.</p>
+      <p class="page-desc">Koleksi lengkap video dan foto kenangan kelas VIIID.</p>
       <div class="album-grid" id="album-grid"></div>
-    </section>
-
-    <!-- CHAT GLOBAL -->
-    <section class="tab" id="tab-chat">
-      <div class="eyebrow">Frekuensi Bersama</div>
-      <h1 class="page-title">Chat Global</h1>
-      <p class="page-desc">Ruang obrolan bersama seluruh kelas. Demi privasi, seluruh pesan otomatis terhapus setiap satu jam.</p>
-
-      <div class="card" id="gate-card">
-        <div class="gate-box">
-          <p style="color:var(--foam-dim);font-size:13.5px;margin-bottom:16px;">Untuk masuk, ucapkan kata sandi frekuensi terlebih dahulu.</p>
-          <div id="gate-error"></div>
-          <input type="text" id="gate-input" placeholder="Ketik kata sandi di sini…" autocomplete="off">
-          <button class="submit-btn" id="gate-btn">Buka Frekuensi</button>
-          <div class="gate-hint">Tanpa kata sandi yang tepat, akses ke chat global akan ditolak.</div>
-        </div>
-      </div>
-
-      <div class="card chat-shell" id="chat-shell">
-        <div class="chat-timer">Reset otomatis dalam <b id="chat-countdown">60:00</b></div>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input-row">
-          <input type="text" id="chat-name" placeholder="Nama panggilan">
-          <input type="text" id="chat-input" placeholder="Tulis pesan…">
-          <button id="chat-send">Kirim</button>
-        </div>
-      </div>
     </section>
 
   </main>
@@ -579,94 +468,103 @@ async function storeSet(key, value, shared){
   try{ await window.storage.set(key, JSON.stringify(value), shared); }catch(e){ console.error('storage set failed', e); }
 }
 
-/* ================= ABSENSI ================= */
-const absenForm = document.getElementById('absen-form');
-const logList = document.getElementById('log-list');
-const reasonField = document.getElementById('reason-field');
-const reasonInput = document.getElementById('absen-reason');
-const lblHadir = document.getElementById('lbl-hadir');
-const lblSakit = document.getElementById('lbl-sakit');
-const lblIzin = document.getElementById('lbl-izin');
-const lblAlfa = document.getElementById('lbl-alfa');
-
-function updateStatusStyle(){
-  const val = document.querySelector('input[name=status]:checked').value;
-  lblHadir.classList.toggle('sel-hadir', val==='Hadir');
-  lblSakit.classList.toggle('sel-sakit', val==='Sakit');
-  lblIzin.classList.toggle('sel-izin', val==='Izin');
-  lblAlfa.classList.toggle('sel-alfa', val==='Alfa');
-  if(val!=='Hadir'){
-    reasonField.classList.add('show');
-    reasonInput.required = true;
-  }else{
-    reasonField.classList.remove('show');
-    reasonInput.required = false;
-    reasonInput.value='';
-  }
-}
-document.querySelectorAll('input[name=status]').forEach(r=>r.addEventListener('change', updateStatusStyle));
-updateStatusStyle();
-
-function todayKey(){
-  const d = new Date();
-  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-}
-
-function renderLogs(records){
-  if(!records || records.length===0){
-    logList.innerHTML = '<div class="log-empty">Belum ada yang mengisi absensi hari ini.</div>';
-    return;
-  }
-  logList.innerHTML = records.slice().reverse().map(r=>{
-    const dotClass = r.status==='Hadir' ? 'hadir' : r.status==='Sakit' ? 'sakit' : r.status==='Izin' ? 'izin' : 'alfa';
-    const time = new Date(r.ts).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="log-item">
-      <div class="log-dot ${dotClass}"></div>
-      <div style="flex:1;">
-        <div class="log-name">${escapeHtml(r.name)}</div>
-        <div class="log-meta">${r.status} · ${time}</div>
-        ${r.reason ? `<div class="log-reason">"${escapeHtml(r.reason)}"</div>` : ''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
 function escapeHtml(str){
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
 
-let absenKey = 'absensi-'+todayKey();
-(async ()=>{
-  const records = await storeGet(absenKey, true);
-  renderLogs(records || []);
-})();
+/* ================= VIDEO KENANGAN (10 video) ================= */
+const videoItems = [
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/wikul6.mp4'}
+];
 
-absenForm.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const name = document.getElementById('absen-name').value.trim();
-  const status = document.querySelector('input[name=status]:checked').value;
-  const reason = reasonInput.value.trim();
-  if(!name) return;
-  if(status!=='Hadir' && !reason){
-    document.getElementById('absen-msg').textContent = 'Mohon isi alasan tidak masuk sekolah.';
-    document.getElementById('absen-msg').style.color = '#FF8A8A';
-    return;
-  }
-  const submitBtn = absenForm.querySelector('.submit-btn');
-  submitBtn.disabled = true;
-  const records = (await storeGet(absenKey, true)) || [];
-  records.push({name, status, reason: status!=='Hadir' ? reason : '', ts: Date.now()});
-  await storeSet(absenKey, records, true);
-  renderLogs(records);
-  document.getElementById('absen-msg').style.color = 'var(--cyan)';
-  document.getElementById('absen-msg').textContent = 'Absensi terkirim. Terima kasih!';
-  absenForm.reset();
-  document.querySelector('input[name=status][value="Hadir"]').checked = true;
-  updateStatusStyle();
-  submitBtn.disabled = false;
-  setTimeout(()=>{ document.getElementById('absen-msg').textContent=''; }, 3500);
+const videoGrid = document.getElementById('video-grid');
+videoGrid.innerHTML = videoItems.map((item,i)=>{
+  return `<div class="porthole" data-type="video">
+    <video src="${item.src}" muted loop playsinline preload="metadata"></video>
+    <div class="play-badge">▶ Video</div>
+    <div class="num">#${String(i+1).padStart(2,'0')}</div>
+    <div class="cap">${escapeHtml(item.cap)}</div>
+  </div>`;
+}).join('');
+
+// Video hover play
+videoGrid.querySelectorAll('.porthole[data-type="video"]').forEach(p=>{
+  const vid = p.querySelector('video');
+  p.addEventListener('mouseenter', ()=>vid.play().catch(()=>{}));
+  p.addEventListener('mouseleave', ()=>{ vid.pause(); vid.currentTime=0; });
+  p.addEventListener('click', ()=>{
+    if(vid.paused){ vid.setAttribute('controls',''); vid.play().catch(()=>{}); }
+  });
+});
+
+/* ================= FOTO KENANGAN (10 foto) ================= */
+const photoItems = [
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'},
+  {cap:'Coming Soon', src:'https://files.catbox.moe/geeol2.jpg'}
+];
+
+const photoGrid = document.getElementById('photo-grid');
+photoGrid.innerHTML = photoItems.map((item,i)=>{
+  return `<div class="porthole" data-type="image">
+    <img src="${item.src}" alt="${escapeHtml(item.cap)}" loading="lazy">
+    <div class="num">#${String(i+1).padStart(2,'0')}</div>
+    <div class="cap">${escapeHtml(item.cap)}</div>
+  </div>`;
+}).join('');
+
+/* ================= ALBUM KENANGAN (Campuran 10) ================= */
+const albumItems = [
+  {cap:'Hari Pertama Hut Spensa', type:'image', src: 'https://files.catbox.moe/2tvcrx.jpg'},
+  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/0halpb.jpg'},
+  {cap:'Hut Spensa', type:'video', src:'https://files.catbox.moe/7yctnw.mp4'},
+  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/b94zcb.jpg'},
+  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/7irhat.jpg'},
+  {cap:'Lomba', type:'video', src:'https://files.catbox.moe/7q3wqa.mp4'},
+  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/0halpb.jpg'},
+  {cap:'Fotbar', type:'image', src: 'https://files.catbox.moe/yz87es.jpg'},
+  {cap:'Hari Terakhir Hut Spensa', type:'image', src: 'https://files.catbox.moe/kjcx82.jpg'},
+  {cap:'Hari Terakhir Hut Spensa', type:'image', src: 'https://files.catbox.moe/lwtwyy.jpg'}
+];
+
+const albumGrid = document.getElementById('album-grid');
+albumGrid.innerHTML = albumItems.map((item,i)=>{
+  const media = item.type==='video'
+    ? `<video src="${item.src}" muted loop playsinline preload="metadata"></video><div class="play-badge">▶ Video</div>`
+    : `<img src="${item.src}" alt="${escapeHtml(item.cap)}" loading="lazy">`;
+  return `<div class="porthole" data-type="${item.type}">
+    ${media}
+    <div class="num">#${String(i+1).padStart(2,'0')}</div>
+    <div class="cap">${escapeHtml(item.cap)}</div>
+  </div>`;
+}).join('');
+
+// Album video hover play
+albumGrid.querySelectorAll('.porthole[data-type="video"]').forEach(p=>{
+  const vid = p.querySelector('video');
+  p.addEventListener('mouseenter', ()=>vid.play().catch(()=>{}));
+  p.addEventListener('mouseleave', ()=>{ vid.pause(); vid.currentTime=0; });
+  p.addEventListener('click', ()=>{
+    if(vid.paused){ vid.setAttribute('controls',''); vid.play().catch(()=>{}); }
+  });
 });
 
 /* ================= STRUKTUR KELAS ================= */
@@ -685,41 +583,6 @@ async function saveStructure(){
 }
 roleNodes.forEach(n=> n.addEventListener('blur', saveStructure));
 
-/* ================= ALBUM KENANGAN ================= */
-const albumGrid = document.getElementById('album-grid');
-const albumItems = [
-  {cap:'Hari Pertama Hut Spensa', type:'image', src: 'https://files.catbox.moe/2tvcrx.jpg'},
-  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/0halpb.jpg'},
-  {cap:'Hut Spensa', type:'video', src:'https://files.catbox.moe/7yctnw.mp4'},
-  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/b94zcb.jpg'},
-  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/7irhat.jpg'},
-  {cap:'Lomba', type:'video', src:'https://files.catbox.moe/7q3wqa.mp4'},
-  {cap:'Hut Spensa', type:'image', src: 'https://files.catbox.moe/0halpb.jpg'},
-  {cap:'Fotbar', type:'image', src: 'https://files.catbox.moe/yz87es.jpg'},
-  {cap:'Hari Terakhir Hut Spensa', type:'image', src: 'https://files.catbox.moe/kjcx82.jpg'},
-  {cap:'Hari Terakhir Hut Spensa', type:'image', src: 'https://files.catbox.moe/lwtwyy.jpg'}
-];
-albumGrid.innerHTML = albumItems.map((item,i)=>{
-  const media = item.type==='video'
-    ? `<video src="${item.src}" muted loop playsinline preload="metadata"></video><div class="play-badge">▶ Video</div>`
-    : `<img src="${item.src}" alt="${escapeHtml(item.cap)}" loading="lazy">`;
-  return `<div class="porthole" data-type="${item.type}">
-    ${media}
-    <div class="num">#${String(i+1).padStart(2,'0')}</div>
-    <div class="cap">${escapeHtml(item.cap)}</div>
-  </div>`;
-}).join('');
-
-// video: play on hover/tap, pause+reset saat keluar
-albumGrid.querySelectorAll('.porthole[data-type="video"]').forEach(p=>{
-  const vid = p.querySelector('video');
-  p.addEventListener('mouseenter', ()=>vid.play().catch(()=>{}));
-  p.addEventListener('mouseleave', ()=>{ vid.pause(); vid.currentTime=0; });
-  p.addEventListener('click', ()=>{
-    if(vid.paused){ vid.setAttribute('controls',''); vid.play().catch(()=>{}); }
-  });
-});
-
 /* ================= MUSIC PLAYER ================= */
 const musicFab = document.getElementById('music-fab');
 const musicPanel = document.getElementById('music-panel');
@@ -729,7 +592,7 @@ let playlist = [
   {title:'Anak Sekolah', artist:'Chrisye', src:'https://files.catbox.moe/wcfuok.mp3'},
 ];
 let currentIndex = 0;
-let repeatMode = 'all'; // 'off' | 'all' | 'one'
+let repeatMode = 'all';
 const audio = new Audio();
 audio.preload = 'none';
 
@@ -826,7 +689,7 @@ repeatBtn.addEventListener('click', ()=>{
   repeatBtn.classList.toggle('active', repeatMode!=='off');
   repeatBtn.title = repeatMode==='one' ? 'Ulangi satu lagu' : repeatMode==='all' ? 'Ulangi semua' : 'Ulangi (mati)';
 });
-repeatBtn.classList.add('active'); // default 'all'
+repeatBtn.classList.add('active');
 
 audio.addEventListener('play', ()=>setPlayingUI(true));
 audio.addEventListener('pause', ()=>setPlayingUI(false));
@@ -846,107 +709,6 @@ audio.addEventListener('ended', ()=>{
   else { progressFill.style.width='0%'; }
 });
 renderPlaylist();
-
-/* ================= CHAT GLOBAL ================= */
-const GATE_PHRASE = '8d letsgo';
-const gateInput = document.getElementById('gate-input');
-const gateBtn = document.getElementById('gate-btn');
-const gateError = document.getElementById('gate-error');
-const gateCard = document.getElementById('gate-card');
-const chatShell = document.getElementById('chat-shell');
-const chatMessagesEl = document.getElementById('chat-messages');
-const chatCountdown = document.getElementById('chat-countdown');
-const HOUR_MS = 60*60*1000;
-let chatUnlocked = false;
-let myChatId = 'u-'+Math.random().toString(36).slice(2,9);
-
-function tryUnlock(){
-  const val = gateInput.value.trim().toLowerCase();
-  if(val === GATE_PHRASE){
-    chatUnlocked = true;
-    gateCard.style.display = 'none';
-    chatShell.classList.add('show');
-    initChat();
-  }else{
-    gateError.textContent = 'Akses ditolak — kata sandi frekuensi tidak dikenali.';
-    gateInput.value='';
-  }
-}
-gateBtn.addEventListener('click', tryUnlock);
-gateInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') tryUnlock(); });
-
-async function ensureResetWindow(){
-  let lastReset = await storeGet('chat-last-reset', true);
-  const now = Date.now();
-  if(!lastReset){
-    lastReset = now;
-    await storeSet('chat-last-reset', lastReset, true);
-  }
-  if(now - lastReset >= HOUR_MS){
-    await storeSet('chat-messages', [], true);
-    lastReset = now;
-    await storeSet('chat-last-reset', lastReset, true);
-  }
-  return lastReset;
-}
-
-function renderChat(messages){
-  chatMessagesEl.innerHTML = messages.map(m=>{
-    const mine = m.uid===myChatId;
-    const time = new Date(m.ts).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="msg ${mine?'me':'other'}">
-      <div class="m-name">${escapeHtml(m.name)}</div>
-      <div>${escapeHtml(m.text)}</div>
-      <div class="m-time">${time}</div>
-    </div>`;
-  }).join('');
-  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-}
-
-let chatPoll = null;
-async function initChat(){
-  let lastReset = await ensureResetWindow();
-  const messages = (await storeGet('chat-messages', true)) || [];
-  renderChat(messages);
-  updateCountdown(lastReset);
-
-  chatPoll = setInterval(async ()=>{
-    lastReset = await ensureResetWindow();
-    const msgs = (await storeGet('chat-messages', true)) || [];
-    renderChat(msgs);
-    updateCountdown(lastReset);
-  }, 4000);
-}
-
-function updateCountdown(lastReset){
-  const remain = Math.max(0, HOUR_MS - (Date.now()-lastReset));
-  const m = String(Math.floor(remain/60000)).padStart(2,'0');
-  const s = String(Math.floor((remain%60000)/1000)).padStart(2,'0');
-  chatCountdown.textContent = m+':'+s;
-}
-setInterval(async ()=>{
-  if(!chatUnlocked) return;
-  const lastReset = await storeGet('chat-last-reset', true);
-  if(lastReset) updateCountdown(lastReset);
-}, 1000);
-
-document.getElementById('chat-send').addEventListener('click', sendChat);
-document.getElementById('chat-input').addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendChat(); });
-
-async function sendChat(){
-  if(!chatUnlocked) return;
-  const nameInput = document.getElementById('chat-name');
-  const textInput = document.getElementById('chat-input');
-  const name = nameInput.value.trim() || 'Anonim';
-  const text = textInput.value.trim();
-  if(!text) return;
-  await ensureResetWindow();
-  const messages = (await storeGet('chat-messages', true)) || [];
-  messages.push({uid:myChatId, name, text, ts:Date.now()});
-  await storeSet('chat-messages', messages, true);
-  renderChat(messages);
-  textInput.value='';
-}
 
 })();
 </script>
